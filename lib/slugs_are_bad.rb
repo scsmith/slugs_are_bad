@@ -1,6 +1,6 @@
 module SlugsAreBad  
   # Make this model act as a permalink without slugs. Takes the attribute to be used as a permalink and the attribute to generate the permalink from
-  def slugs_are_bad(permalink_method = :permalink, generate_from = :title)
+  def slugs_are_bad(generate_from = :title, permalink_method = :permalink)
     include InstanceMethods
     ClassMethods.setup_slugs_are_bad self do
       self.permalink_method = permalink_method
@@ -64,8 +64,8 @@ module SlugsAreBad
             super(id_to_find, options)
           else
             item = self.send("find_by_#{self.permalink_method}", id_to_find)
-            #raise "Error finding #{self.class.name} with #{self.permalink_method} #{id_to_find} (#{id_to_find.class.name})" if item.nil?
-            logger.info "Error finding #{self.class.name} with #{self.permalink_method} #{id_to_find} (#{id_to_find.class.name})" if item.nil?
+            raise ActiveRecord::RecordNotFound,
+              "Error finding #{self.class.name} with #{self.permalink_method} #{id_to_find} (#{id_to_find.class.name})" if item.nil?
             item
           end
         end

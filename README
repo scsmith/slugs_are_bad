@@ -3,7 +3,7 @@ SlugsAreBad
 
 Slugs are bad kids! Okaay.
 
-They're not really bad but sometimes you just don't want a slug crawling all over your url. This plugin acts as a drop in to your model to make its id in urls an attribute of your choice.
+They're not really bad but a number of solutions out there use both the models id and a slug (permalink) in the URL. Sometimes you just don't want a number crawling all over your url. This plugin acts as a drop in to your model to make its id in urls an attribute of your choice.
 
 This plugin makes use of the to_params method of active record models so you will have to pass the whole object to any url methods not just the id. If you are already making use of rails' built in url methods and passing models as params then you shouldn't need to edit views or controllers.
 
@@ -22,7 +22,7 @@ app/models/user.rb
   slugs_are_bad(:permalink_attribute, :generate_from)
   
   # ie. slugs_are_bad(:permalink, :title)
-  # will automatically generate a slug-less permalink from the title attribute and store it in the model.
+  # will automatically generate a id-free permalink from the title attribute and store it in the model.
   
 
 Then in your view
